@@ -47,62 +47,62 @@
  * to demonstrate that our tester can find them.
  */
 
-int sqr(int x) { 
-	return x*x*x;   // a deliberate bug (it should be: x*x)
-}
+// int sqr(int x) { 
+// 	return x*x*x;   // a deliberate bug (it should be: x*x)
+// }
 
-int roundd(double x) { 
-	return int(x);  // a deliberate bug (it should be: int(x+0.5)).
-}
+// int roundd(double x) { 
+// 	return int(x);  // a deliberate bug (it should be: int(x+0.5)).
+// }
 
 
 
-/**
- * Below we define a whole new struct with deliberate bugs, 
- * to demonstrate that our tester can find bugs even in new classes.
- */
+// /**
+//  * Below we define a whole new struct with deliberate bugs, 
+//  * to demonstrate that our tester can find bugs even in new classes.
+//  */
 
-struct MyStruct {
-	int num;
-	MyStruct(int num): num(num) {}
-	bool operator==(const MyStruct& other) {
-		return false; // a deliberate bug
-	}
-	bool operator!=(const MyStruct& other) {
-		return num!=other.num; // no bug 
-	}
-	int myNum() const { 
-		return num+2;   // a deliberate bug
-	}
-};
+// struct MyStruct {
+// 	int num;
+// 	MyStruct(int num): num(num) {}
+// 	bool operator==(const MyStruct& other) {
+// 		return false; // a deliberate bug
+// 	}
+// 	bool operator!=(const MyStruct& other) {
+// 		return num!=other.num; // no bug 
+// 	}
+// 	int myNum() const { 
+// 		return num+2;   // a deliberate bug
+// 	}
+// };
 
-int getNum(const MyStruct& s) {
-	return s.num+1; // a deliberate bug
-}
+// int getNum(const MyStruct& s) {
+// 	return s.num+1; // a deliberate bug
+// }
 
-ostream& operator<< (ostream& out, const MyStruct& tc) {
-	return (out << "MyStrct"<<"("<<tc.num<<")"); // a deliberate typo (forgot "u").
-}
+// ostream& operator<< (ostream& out, const MyStruct& tc) {
+// 	return (out << "MyStrct"<<"("<<tc.num<<")"); // a deliberate typo (forgot "u").
+// }
 
-int main() {
-	TestCase("Test int operators", cerr)
-		.check_equal(5,5)                  // check operator ==. Here there is no bug.
-		.check_different(5,6)              // check operator !=. Here there is no bug.
-		.check_function(sqr, 1, 1)         // check a function int->int.     Here there is no bug.
-		.check_function(sqr, 5, 25)        // check a function int->int.    Here there is a bug.
-		.check_function(roundd, 5.3, 5)     // check a function double->int. Here there is no bug.
-		.check_function(roundd, 5.8, 6)     // check a function double->int. Here there is a bug.
-		.check_output(5, "5")     // check output operator <<
-		.print();
+// int main() {
+// 	TestCase("Test int operators", cerr)
+// 		.check_equal(5,5)                  // check operator ==. Here there is no bug.
+// 		.check_different(5,6)              // check operator !=. Here there is no bug.
+// 		.check_function(sqr, 1, 1)         // check a function int->int.     Here there is no bug.
+// 		.check_function(sqr, 5, 25)        // check a function int->int.    Here there is a bug.
+// 		.check_function(roundd, 5.3, 5)     // check a function double->int. Here there is no bug.
+// 		.check_function(roundd, 5.8, 6)     // check a function double->int. Here there is a bug.
+// 		.check_output(5, "5")     // check output operator <<
+// 		.print();
 
-	TestCase("Test MyStruct operators", cerr)
-		.check_equal(MyStruct(5), MyStruct(5))      // Here there is a bug.
-		.check_different(MyStruct(5), MyStruct(6))  // Here there is no bug.
-		.check_output(MyStruct(5), "MyStruct(5)")   // Here there is a bug. 
-		.check_function(getNum, MyStruct(5), 5)     // Here there is a bug.
-		.check_function([](const MyStruct& s){return s.myNum();}, MyStruct(5), 5) // Here there is a bug.
-		.print();
-}
+// 	TestCase("Test MyStruct operators", cerr)
+// 		.check_equal(MyStruct(5), MyStruct(5))      // Here there is a bug.
+// 		.check_different(MyStruct(5), MyStruct(6))  // Here there is no bug.
+// 		.check_output(MyStruct(5), "MyStruct(5)")   // Here there is a bug. 
+// 		.check_function(getNum, MyStruct(5), 5)     // Here there is a bug.
+// 		.check_function([](const MyStruct& s){return s.myNum();}, MyStruct(5), 5) // Here there is a bug.
+// 		.print();
+// }
 
 /* Expected output:
 	Test int operators: Failure in test #4: Function should return 25 but returned 125!

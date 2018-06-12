@@ -61,36 +61,21 @@ public:
         return *this;
     }
 
-    template <typename T,typename S>
-    TestCase& check_function(T(*func)(S),S s,T t)
-    {
-        counter++;
-        T ret = func(s);
-        if(ret==t)
-            passed++;
-        else//Test MyStruct operators: Failure in test #4: Function should return 5 but returned 6!
-        {
-            failed++;
-            *os<<name<<": Failure in test #"<<counter<<": Function should return "<<t<<" but returned "<<ret<<endl;//check
-        }  
-        return *this;
-    }
+    // template <typename T,typename S>
+    // TestCase& check_function(T(*func)(S),S s,T t)
+    // {
+    //     counter++;
+    //     T ret = func(s);
+    //     if(ret==t)
+    //         passed++;
+    //     else//Test MyStruct operators: Failure in test #4: Function should return 5 but returned 6!
+    //     {
+    //         failed++;
+    //         *os<<name<<": Failure in test #"<<counter<<": Function should return "<<t<<" but returned "<<ret<<endl;//check
+    //     }  
+    //     return *this;
+    // }
 
-    template <typename T,typename S>
-    TestCase& check_function(T(*func)(const S&),S s,T t)
-    {
-        counter++;
-        T ret = func(s);
-        if(ret==t)
-            passed++;
-        else//Test MyStruct operators: Failure in test #4: Function should return 5 but returned 6!
-        {
-            failed++;
-            *os<<name<<": Failure in test #"<<counter<<": Function should return "<<t<<" but returned "<<ret<<endl;//check
-        }  
-        return *this;
-    }
-//
     // template <typename T,typename S>
     // TestCase& check_function(T(*func)(const S&),S s,T t)
     // {
@@ -105,6 +90,21 @@ public:
     //     }  
     //     return *this;
     // }
+//
+    template <typename T,typename S,typename func>
+    TestCase& check_function(func f,S s,T t)
+    {
+        counter++;
+        T ret = f(s);
+        if(ret==t)
+            passed++;
+        else//Test MyStruct operators: Failure in test #4: Function should return 5 but returned 6!
+        {
+            failed++;
+            *os<<name<<": Failure in test #"<<counter<<": Function should return "<<t<<" but returned "<<ret<<endl;//check
+        }  
+        return *this;
+    }
 
     void print();
 };

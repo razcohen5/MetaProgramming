@@ -84,7 +84,7 @@ ostream& operator<< (ostream& out, const MyStruct& tc) {
 	return (out << "MyStrct"<<"("<<tc.num<<")"); // a deliberate typo (forgot "u").
 }
 
-int main() {
+/*int main() {
 	TestCase("Test int operators", cerr)
 		.check_equal(5,5)                  // check operator ==. Here there is no bug.
 		.check_different(5,6)              // check operator !=. Here there is no bug.
@@ -102,7 +102,7 @@ int main() {
 		.check_function(getNum, MyStruct(5), 5)     // Here there is a bug.
 		.check_function([](const MyStruct& s){return s.myNum();}, MyStruct(5), 5) // Here there is a bug.
 		.print();
-}
+}*/
 
 /* Expected output:
 	Test int operators: Failure in test #4: Function should return 25 but returned 125!

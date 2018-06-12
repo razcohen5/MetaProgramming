@@ -101,7 +101,7 @@ public:
         else//Test MyStruct operators: Failure in test #4: Function should return 5 but returned 6!
         {
             failed++;
-            *os<<name<<": Failure in test #"<<counter<<": Function should return "<<t<<" but returned "<<ret<<endl;//check
+            *os<<name<<": Failure in test #"<<counter<<": Function should return "<<t<<" but returned "<<ret<<"!"<<endl;//check
         }  
         return *this;
     }

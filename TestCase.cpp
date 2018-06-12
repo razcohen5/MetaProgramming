@@ -47,42 +47,42 @@
  * to demonstrate that our tester can find them.
  */
 
-int sqr(int x) { 
-	return x*x*x;   // a deliberate bug (it should be: x*x)
-}
+// int sqr(int x) { 
+// 	return x*x*x;   // a deliberate bug (it should be: x*x)
+// }
 
-int roundd(double x) { 
-	return int(x);  // a deliberate bug (it should be: int(x+0.5)).
-}
+// int roundd(double x) { 
+// 	return int(x);  // a deliberate bug (it should be: int(x+0.5)).
+// }
 
 
 
-/**
- * Below we define a whole new struct with deliberate bugs, 
- * to demonstrate that our tester can find bugs even in new classes.
- */
+// /**
+//  * Below we define a whole new struct with deliberate bugs, 
+//  * to demonstrate that our tester can find bugs even in new classes.
+//  */
 
-struct MyStruct {
-	int num;
-	MyStruct(int num): num(num) {}
-	bool operator==(const MyStruct& other) {
-		return false; // a deliberate bug
-	}
-	bool operator!=(const MyStruct& other) {
-		return num!=other.num; // no bug 
-	}
-	int myNum() const { 
-		return num+2;   // a deliberate bug
-	}
-};
+// struct MyStruct {
+// 	int num;
+// 	MyStruct(int num): num(num) {}
+// 	bool operator==(const MyStruct& other) {
+// 		return false; // a deliberate bug
+// 	}
+// 	bool operator!=(const MyStruct& other) {
+// 		return num!=other.num; // no bug 
+// 	}
+// 	int myNum() const { 
+// 		return num+2;   // a deliberate bug
+// 	}
+// };
 
-int getNum(const MyStruct& s) {
-	return s.num+1; // a deliberate bug
-}
+// int getNum(const MyStruct& s) {
+// 	return s.num+1; // a deliberate bug
+// }
 
-ostream& operator<< (ostream& out, const MyStruct& tc) {
-	return (out << "MyStrct"<<"("<<tc.num<<")"); // a deliberate typo (forgot "u").
-}
+// ostream& operator<< (ostream& out, const MyStruct& tc) {
+// 	return (out << "MyStrct"<<"("<<tc.num<<")"); // a deliberate typo (forgot "u").
+// }
 
 /*int main() {
 	TestCase("Test int operators", cerr)
